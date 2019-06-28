@@ -1,4 +1,4 @@
 import $ from 'jquery';
-import slick from 'slick-carousel';
+// import slick from 'slick-carousel';
 
-$('.your-class').slick();
+// $('.your-class').slick();

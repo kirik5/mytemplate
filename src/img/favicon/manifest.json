@@ -6,9 +6,8 @@
   "lang": "en-US",
   "display": "standalone",
   "orientation": "portrait",
-  "scope": "/",
   "start_url": "/?homescreen=1",
-  "background_color": "#020307",
+  "background_color": "#fff",
   "theme_color": "#fff",
   "icons": [
     {
