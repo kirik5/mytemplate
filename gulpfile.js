@@ -50,7 +50,8 @@ const	path = {
                     srcfiles: ['./src/less/**/*.less',
 					           '!./src/less/smart-grid.less',
 							   '!./src/less/settings.less',
-							   '!./src/less/mixins.less']
+							   '!./src/less/mixins.less',
+							   '!./src/less/fonts.less']
                 },
 				php: {
 					srcfile: './src/php/**/*.php',
@@ -165,7 +166,8 @@ gulp.task('delsrc', function(){
 				'!'+path.src.less.srcdir+'main.less',
 				'!'+path.src.less.srcdir+'mixins.less',
 				'!'+path.src.less.srcdir+'settings.less',
-				'!'+path.src.less.srcdir+'smart-grid.less'])
+				'!'+path.src.less.srcdir+'smart-grid.less',
+				'!'+path.src.less.srcdir+'fonts.less'])
 });
 
 gulp.task('deldist', function(){
