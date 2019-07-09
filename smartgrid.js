@@ -11,6 +11,9 @@ const settings = {
 			fields: "30px"
 		},
 		breakPoints: {
+			lg: {
+				width: "1200px",
+			},
 			md: {
 				width: "992px",
 				fields: "15px"

@@ -26,4 +26,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# Dependency directories
+node_modules/
+
 # End of https://www.gitignore.io/api/windows

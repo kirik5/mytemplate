@@ -8,11 +8,748 @@
 
 .reset();
 
-.wrapper{
+.wrapper {
     .wrapper();
 }
 
-.your-class{
-	background: orange;
-	color: magenta;
-};
+body {
+    font-family: @txtfam;
+}
+
+a {
+    color: @txtcolor;
+}
+
+.first {
+    position: relative;
+    min-height: 725px;
+
+    .xs-block( {
+            min-height: 660px;
+        }
+
+    );
+
+    &_layer01 {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        background-color: aqua;
+        display: flex;
+        z-index: -1;
+    }
+
+    &_bgleft {
+        background: @bgcolor url("../img/noutbook.jpg") no-repeat center top / cover;
+        width: 33.5541667%;
+
+        .xs-block( {
+                width: 100%;
+            }
+
+        );
+    }
+
+    &_bgright {
+        background: @bgcolor;
+        width: 66.458333%;
+
+        .xs-block( {
+                display: none;
+            }
+
+        );
+    }
+
+    &_whiterec {
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        width: 66.40625%;
+        height: 35px;
+        background: white;
+
+        .xs-block( {
+                display: none;
+            }
+
+        );
+    }
+
+    &_layer02 {
+        z-index: 1;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        height: 100%;
+    }
+
+    &_header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .wrapper();
+    }
+
+    &_offergroup {
+        display: flex;
+        padding-top: 70px;
+        padding-bottom: 70px;
+
+        .lg-block( {
+                padding-top: 120px;
+            }
+
+        );
+
+        .xs-block( {}
+
+        );
+    }
+
+    &_offerimg {
+        width: 33.5541667%;
+        position: relative;
+        display: flex;
+        justify-content: flex-end;
+
+        .md-block( {
+                display: none;
+            }
+
+        );
+
+        img {
+            .lg-block( {
+                    max-width: 300px;
+                }
+
+            );
+        }
+    }
+
+    &_offerdescription {
+        color: @txtcolor;
+        width: 66.458333%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .md-block( {
+                width: auto;
+            }
+
+        );
+
+        h1 {
+            .fontfull(700, 75px, 75px, 0.000001em);
+            padding-left: 260px;
+            text-indent: -60px;
+            padding-right: 30px;
+            max-width: 580px;
+            margin-bottom: 50px;
+
+            .lg-block( {
+                    padding-left: 180px;
+                    text-indent: -40px;
+                    .fontfull(700, 65px, 65px, 0.000001em);
+                }
+
+            );
+
+            .md-block( {
+                    .fontfull(700, 75px, 75px, 0.000001em);
+                    padding-left: 28%;
+                    text-indent: -60px;
+                    padding-right: 15px;
+                    max-width: 690px;
+                }
+
+            );
+
+            .sm-block( {
+                    padding: 0 15px;
+                    text-indent: 0px;
+                    text-align: center;
+                    max-width: none;
+                }
+
+            );
+
+            .xs-block( {
+                    .fontfull(700, 45px, 45px, 0.000001em);
+                }
+
+            );
+        }
+
+        p {
+            .fontfull(400, 30px, 37px, 0.06em);
+            padding-left: 260px;
+            padding-right: 30px;
+
+            .lg-block( {
+                    padding-left: 180px;
+                }
+
+            );
+
+            .md-block( {
+                    padding-left: 35%;
+                    padding-right: 15px;
+                }
+
+            );
+
+            .sm-block( {
+                    padding-left: 25%;
+                    text-indent: 0px;
+                }
+
+            );
+
+            .xs-block( {
+                    .fontfull(400, 25px, 37px, 0.06em);
+                    padding: 0 15px;
+                    margin: 0 auto;
+                }
+
+            );
+
+            &:before {
+                content: '-';
+                padding-right: 5px;
+
+                .xs-block( {
+                        display: none;
+                    }
+
+                )
+            }
+        }
+    }
+}
+
+// НАЧАЛО "Меню"
+
+.nav {
+
+    .md-block( {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100%;
+            padding-top: 60px;
+            z-index: 100;
+            width: 250px;
+            display: none;
+            -webkit-box-shadow: -5px 0px 10px 0px rgba(0, 0, 0, 0.1);
+            -moz-box-shadow: -5px 0px 10px 0px rgba(0, 0, 0, 0.1);
+            box-shadow: -5px 0px 10px 0px rgba(0, 0, 0, 0.1);
+            background: @bgcolor;
+        }
+
+    );
+
+    ul {
+        display: flex;
+
+        .md-block( {
+                display: block;
+            }
+
+        );
+
+        li {
+
+            .md-block( {
+                    padding-top: 20px;
+                }
+
+            );
+
+            a {
+                text-decoration: none;
+                margin-left: 25px;
+                .font(400, 18px);
+                position: relative;
+
+                &:after {
+                    transition: 0.3s;
+                    content: '';
+                    position: absolute;
+                    width: 0%;
+                    bottom: -3px;
+                    right: 0px;
+                    height: 1px;
+                    background: @txtcolor;
+                }
+
+                &:hover:after {
+                    width: 100%;
+                    left: 0px;
+                }
+            }
+        }
+    }
+}
+
+// КОНЕЦ "Меню"
+
+// НАЧАЛО Кнопка "ГАМБУРГЕР"
+
+.navbutton {
+    position: relative;
+    height: 40px;
+    width: 40px;
+    display: none;
+    cursor: pointer;
+
+    .md-block( {
+            display: block;
+        }
+
+    );
+
+    &-active {
+        position: fixed;
+        z-index: 101;
+        top: 17px;
+        right: 15px;
+    }
+
+    &_line01,
+    &_line02,
+    &_line03 {
+        position: absolute;
+        width: 40px;
+        height: 1px;
+        background-color: @txtcolor;
+        top: 50%;
+        margin-top: -1px;
+        transition: 0.3s;
+        cursor: pointer;
+        content: '';
+    }
+
+    &_line01 {
+
+        &-active {
+            transform: scaleX(0);
+        }
+    }
+
+    &_line02 {
+        transform: translateY(-10px);
+
+        &-active {
+            transform: rotate(45deg);
+        }
+    }
+
+    &_line03 {
+        transform: translateY(10px);
+
+        &-active {
+            transform: rotate(-45deg);
+        }
+    }
+}
+
+// КОНЕЦ кнопки "ГАМБУРГЕР"
+
+// НАЧАЛО "Классы для анимирования мобильного меню"
+
+.menu-enter {
+    opacity: 0;
+    transform: translateX(250px);
+}
+
+.menu-enter-active {
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.menu-enter-to {}
+
+.menu-leave {}
+
+.menu-leave-active {
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.menu-leave-to {
+    opacity: 0;
+    transform: translateX(250px);
+}
+
+.nav_overlay {
+
+    display: none;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 99;
+    content: '';
+    top: 0;
+    left: 0;
+}
+
+// КОНЕЦ "Классы для анимирования мобильного меню"
+
+// НАЧАЛО "Мышка с анимацией"
+
+.mouse-icon {
+    border: none;
+    border-radius: 16px;
+    height: 40px;
+    width: 24px;
+    display: block;
+    z-index: 10;
+    opacity: 0.7;
+    position: absolute;
+    left: 50%;
+    margin-left: -12px;
+    bottom: 100px;
+
+    .xs-block( {
+            bottom: 55px;
+        }
+
+    );
+}
+
+.mouse-icon .wheel {
+    position: relative;
+    border-radius: 10px;
+    background: @txtcolor;
+    width: 2px;
+    height: 6px;
+    top: 4px;
+    margin-left: auto;
+    margin-right: auto;
+    animation-name: drop;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-delay: 0s;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+}
+
+@keyframes drop {
+    0% {
+        top: 5px;
+        opacity: 0;
+    }
+
+    30% {
+        top: 10px;
+        opacity: 1;
+    }
+
+    100% {
+        top: 25px;
+        opacity: 0;
+    }
+}
+
+// КОНЕЦ "Мышка с анимацией"
+
+// НАЧАЛО "Секция Our Serivce"
+
+h2 {
+    .font(800, 36px);
+    text-align: center;
+}
+
+.services {
+    padding: 130px 0;
+
+    &_items {
+        .row-flex();
+        margin-top: 40px;
+        position: relative;
+        z-index: 1;
+        justify-content: center;
+    }
+
+    &_item {
+        .col-padding();
+        .size(4);
+        position: relative;
+        padding-top: 90px;
+        padding-bottom: 160px;
+        overflow: hidden;
+
+        .size-md(5.2);
+        .size-sm(8);
+        .size-xs(12);
+
+
+        &:hover {
+
+            .services_description {
+                bottom: 0;
+                opacity: 0;
+            }
+
+            .services_fulldescription {
+
+                opacity: 1;
+
+
+            }
+
+            .services_itemlayer01 {
+                opacity: 0;
+            }
+
+            .services_itemlayer02 {
+                opacity: 1;
+            }
+
+            .services_face {
+                fill: @txtcolor;
+            }
+        }
+    }
+
+    &_itemlayer01 {
+        background: rgba(255, 255, 255, 1);
+        background: -moz-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(234, 234, 234, 1) 100%);
+        background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255, 255, 255, 1)), color-stop(100%, rgba(234, 234, 234, 1)));
+        background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(234, 234, 234, 1) 100%);
+        background: -o-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(234, 234, 234, 1) 100%);
+        background: -ms-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(234, 234, 234, 1) 100%);
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(234, 234, 234, 1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#eaeaea', GradientType=0);
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        transition: 0.3s;
+        z-index: -4;
+    }
+
+    &_itemlayer02 {
+        background: rgba(2, 60, 71, 1);
+        background: -moz-linear-gradient(top, rgba(2, 60, 71, 1) 0%, rgba(70, 111, 119, 1) 64%, rgba(127, 154, 159, 1) 90%, rgba(155, 185, 190, 1) 100%);
+        background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(2, 60, 71, 1)), color-stop(64%, rgba(70, 111, 119, 1)), color-stop(90%, rgba(127, 154, 159, 1)), color-stop(100%, rgba(155, 185, 190, 1)));
+        background: -webkit-linear-gradient(top, rgba(2, 60, 71, 1) 0%, rgba(70, 111, 119, 1) 64%, rgba(127, 154, 159, 1) 90%, rgba(155, 185, 190, 1) 100%);
+        background: -o-linear-gradient(top, rgba(2, 60, 71, 1) 0%, rgba(70, 111, 119, 1) 64%, rgba(127, 154, 159, 1) 90%, rgba(155, 185, 190, 1) 100%);
+        background: -ms-linear-gradient(top, rgba(2, 60, 71, 1) 0%, rgba(70, 111, 119, 1) 64%, rgba(127, 154, 159, 1) 90%, rgba(155, 185, 190, 1) 100%);
+        background: linear-gradient(to bottom, rgba(2, 60, 71, 1) 0%, rgba(70, 111, 119, 1) 64%, rgba(127, 154, 159, 1) 90%, rgba(155, 185, 190, 1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#023c47', endColorstr='#9bb9be', GradientType=0);
+        
+        position: absolute;
+        opacity: 0;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        transition: 0.3s;
+        z-index: -3;
+    }
+
+    &_icon {
+        max-width: 170px;
+        position: relative;
+        margin: 0 auto;
+    }
+
+    &_iconcontainer {
+        position: relative;
+        padding-top: 100%;
+    }
+
+    &_face {
+        transition: 0.3s;
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+    }
+
+    &_description {
+        .fontfull(400, 26px, 26px, 0.2em);
+        text-align: center;
+        margin-top: 30px;
+        position: absolute;
+        bottom: 100px;
+        left: 0;
+        width: 100%;
+        z-index: -2;
+        transition: 0.3s;
+    }
+
+    &_fulldescription {
+        .fontfull(400, 16px, 19.5px, 0);
+        padding: 0 35px;
+        text-align: center;
+        margin-top: 30px;
+        position: absolute;
+        left: 0;
+        right: 0;
+        z-index: -1;
+        transition: 0.3s;
+        top: 250px;
+        opacity: 0;
+        color: @txtcolor;
+
+        .lg-block( {
+                padding: 0 30px;
+                top: 240px;
+            }
+
+        );
+
+        .sm-block( {
+                top: 245px;
+                padding: 0 35px;
+            }
+
+        );
+
+        .xs-block( {
+                top: 240px;
+                padding: 0 20px;
+            }
+
+        );
+    }
+}
+
+// КОНЕЦ "Секция Our Serivce"
+
+// НАЧАЛО "Секция Нюансы"
+
+.nuances {
+    background: @bgcolor02 url("../img/background_third_section.png") no-repeat center top / cover;
+    padding: 40px 0 80px 0;
+    color: @txtcolor;
+
+    .items {
+        .row-flex();
+        justify-content: center;
+
+        .item {
+            .col();
+            .size(5.5);
+            .size-md(10);
+            .size-sm(11);
+            margin-top: 60px;
+
+            .subitems {
+                .row-flex();
+                .xs-block({
+                    justify-content: center;
+                });
+
+                .subitem {
+                    .col();
+                    .size(6);
+                    display: flex;
+                    margin-top: 25px;
+                    align-items: center;
+                    .size-md(6);
+                    .size-xs(12);
+
+                    .count {
+                        .fontfull(700, 24px, 29.3px, 0em);
+                        margin-right: 25px;
+                    }
+
+                    .description {
+                        .fontfull(400, 15px, 18.3px, 0em);
+                    }
+                }
+            }
+        }
+
+        .line {
+            .size(1);
+            display: flex;
+            justify-content: center;
+
+            .lg-block({
+                display: none;
+            });
+
+            
+
+            .line_1px {
+                width: 1px;
+                background: @txtcolor;
+                height: 100%;
+            }
+        }
+    }
+
+    .icons{
+        display: flex;
+        justify-content: center;
+        margin: 0 auto;
+        max-width: 800px;
+        margin-top: 15px;
+        flex-wrap: wrap;
+
+        .iconwidth{
+            width: 20%;
+            
+
+            .xs-block({
+                width: 30%;
+            });
+
+            .icon {
+                max-width: 50px;
+                position: relative;
+                margin: 10px auto;
+
+                .iconcontainer {
+                    position: relative;
+                    padding-top: 100%;
+
+                    svg {
+                        transition: 0.3s;
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        height: 100%;
+                        width: 100%;
+                        fill: @txtcolor;
+                    }
+                }
+            }
+
+        }
+
+       
+    
+        
+    
+        
+    }
+}
+
+h3 {
+    .fontfull(700, 20px, 24.4px, 0em);
+}
+
+h3.big {
+    .fontfull(700, 30px, 36.6px, 0em);
+    margin-top: 70px;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+
+
+// КОНЕЦ "Секция Нюансы"

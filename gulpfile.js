@@ -3,7 +3,11 @@ const	gulp = require('gulp'),
         less = require('gulp-less'),
 		rename = require('gulp-rename'),
 		browsersync = require('browser-sync').create(),
-		webpack = require('webpack-stream');
+		webpackstream = require('webpack-stream'),
+		svgsprite = require('gulp-svg-sprite'),
+		svgmin = require('gulp-svgmin'),
+		cheerio = require('gulp-cheerio'),
+		replace = require('gulp-replace');;
 		
 		
 		//autoprefixer = require('gulp-autoprefixer'),
@@ -34,6 +38,10 @@ const	path = {
                 },
 				img: {
                     srcfile: './src/img/**/*.*',
+                    srcdir: './src/img/'
+                },
+                svg: {
+                    srcfile: './src/img/svg/*.svg',
                     srcdir: './src/img/'
                 },
 				js: {
@@ -90,7 +98,7 @@ var favicons = require("favicons").stream,
     log = require("fancy-log");
 
 gulp.task("favicons", function () {
-    return gulp.src("./src/logo.png").pipe(favicons({
+    return gulp.src("./src/img/logo.png").pipe(favicons({
         path: "favicon/",
         display: "standalone",
         orientation: "portrait",
@@ -119,13 +127,9 @@ function freload(){
 	browsersync.reload();
 }
 
-function fdeljs(){
-	return del(path.src.js.srcdir+'*');
-}
-
 function fscripts(){
-    return gulp.src('./src/js_src/main.js')
-		   .pipe(webpack(webConfig))
+    return gulp.src('./src/js_src/*.js')
+		   .pipe(webpackstream(webConfig))
 		   .pipe(rename({
 			   suffix: '.min'
 		   }))
@@ -141,7 +145,7 @@ function fwatch() {
 	});
 	gulp.watch(path.src.html.srcfile).on('change', freload);
     gulp.watch(path.src.less.srcfile).on('change', gulp.series(fdelcss, fless, freload));
-	gulp.watch(path.src.js_src.srcfile).on('change', gulp.series(fdeljs, fscripts, freload));
+	gulp.watch(path.src.js_src.srcfile).on('change', gulp.series(fscripts, freload));
 	gulp.watch(path.src.img.srcfile, freload);
     gulp.watch(path.src.fonts.srcfile, freload);
 }
@@ -177,6 +181,32 @@ gulp.task('deldist', function(){
 gulp.task('awesome', function(){
 	return gulp.src('./node_modules/font-awesome/fonts/**/*.*')
 	       .pipe(gulp.dest(path.src.fonts.srcdir));
+});
+
+gulp.task('svgsprite', function(){
+	return gulp.src(path.src.svg.srcfile)
+		   .pipe(svgmin({
+		   		js2svg: {
+		   			pretty: true
+		   		}
+		   }))
+		   .pipe(cheerio({
+		   		run: function($, file) {
+		   			$('[fill]').removeAttr('fill');
+					$('[stroke]').removeAttr('stroke');
+					$('[style]').removeAttr('style');
+		   		},
+		   		parserOptions: {xmlMode: true}
+		   }))
+		   .pipe(replace('&gt;', '>'))
+		   .pipe(svgsprite({
+		   		mode: {
+					symbol: {
+						sprite: "../sprite.svg"
+					}
+				}
+			}))
+		.pipe(gulp.dest(path.src.svg.srcdir));
 });
 
 gulp.task('less', fless);
