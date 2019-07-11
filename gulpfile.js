@@ -99,11 +99,36 @@ var favicons = require("favicons").stream,
 
 gulp.task("favicons", function () {
     return gulp.src("./src/img/logo.png").pipe(favicons({
-        path: "favicon/",
+    	appName: 'My App',
+        appShortName: 'App',
+        appDescription: 'This is my application',
+        path: './img/favicon',
         display: "standalone",
+        background: '#023C47',
+        theme_color: '#023C47',
         orientation: "portrait",
         html: "index.html",
         pipeHTML: true,
+        icons: {
+            // Platform Options:
+            // - offset - offset in percentage
+            // - background:
+            //   * false - use default
+            //   * true - force use default, e.g. set background for Android icons
+            //   * color - set background for the specified icons
+            //   * mask - apply mask in order to create circle icon (applied by default for firefox). `boolean`
+            //   * overlayGlow - apply glow effect after mask has been applied (applied by default for firefox). `boolean`
+            //   * overlayShadow - apply drop shadow after mask has been applied .`boolean`
+            //
+            android: false,              // Create Android homescreen icon. `boolean` or `{ offset, background, mask, overlayGlow, overlayShadow }`
+            appleIcon: false,            // Create Apple touch icons. `boolean` or `{ offset, background, mask, overlayGlow, overlayShadow }`
+            appleStartup: false,         // Create Apple startup images. `boolean` or `{ offset, background, mask, overlayGlow, overlayShadow }`
+            coast: false,                // Create Opera Coast icon. `boolean` or `{ offset, background, mask, overlayGlow, overlayShadow }`
+            favicons: true,             // Create regular favicons. `boolean` or `{ offset, background, mask, overlayGlow, overlayShadow }`
+            firefox: false,              // Create Firefox OS icons. `boolean` or `{ offset, background, mask, overlayGlow, overlayShadow }`
+            windows: false,              // Create Windows 8 tile icons. `boolean` or `{ offset, background, mask, overlayGlow, overlayShadow }`
+            yandex: false                // Create Yandex browser icon. `boolean` or `{ offset, background, mask, overlayGlow, overlayShadow }`
+        },
         replace: true
     }))
     .on("error", log)
@@ -144,7 +169,7 @@ function fwatch() {
 		proxy: "http://childps.kirik.org.ua" */
 	});
 	gulp.watch(path.src.html.srcfile).on('change', freload);
-    gulp.watch(path.src.less.srcfile).on('change', gulp.series(fdelcss, fless, freload));
+    gulp.watch(path.src.less.srcfile).on('change', gulp.series(fless, freload));
 	gulp.watch(path.src.js_src.srcfile).on('change', gulp.series(fscripts, freload));
 	gulp.watch(path.src.img.srcfile, freload);
     gulp.watch(path.src.fonts.srcfile, freload);

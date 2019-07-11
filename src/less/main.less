@@ -3,8 +3,9 @@
 @import "mixins.less";
 @import "fonts.less";
 //@import "..\..\node_modules\font-awesome\less\font-awesome.less";
-//@import "..\..\node_modules\slick-carousel\slick\slick.less";
-//@import "..\..\node_modules\slick-carousel\slick\slick-theme.less";
+@import "..\..\node_modules\slick-carousel\slick\slick.less";
+@import "..\..\node_modules\slick-carousel\slick\slick-theme.less";
+@import (inline) "..\..\node_modules\magnific-popup\dist\magnific-popup.css";
 
 .reset();
 
@@ -18,6 +19,16 @@ body {
 
 a {
     color: @txtcolor;
+}
+
+@keyframes incircle {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 .first {
@@ -105,10 +116,6 @@ a {
             }
 
         );
-
-        .xs-block( {}
-
-        );
     }
 
     &_offerimg {
@@ -116,6 +123,12 @@ a {
         position: relative;
         display: flex;
         justify-content: flex-end;
+        animation-name: incircle;
+        animation-duration: 2s;
+        animation-timing-function: linear;
+        animation-delay: 0.25s;
+        animation-play-state: running;
+        animation-fill-mode: both;
 
         .md-block( {
                 display: none;
@@ -546,7 +559,7 @@ h2 {
         background: -ms-linear-gradient(top, rgba(2, 60, 71, 1) 0%, rgba(70, 111, 119, 1) 64%, rgba(127, 154, 159, 1) 90%, rgba(155, 185, 190, 1) 100%);
         background: linear-gradient(to bottom, rgba(2, 60, 71, 1) 0%, rgba(70, 111, 119, 1) 64%, rgba(127, 154, 159, 1) 90%, rgba(155, 185, 190, 1) 100%);
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#023c47', endColorstr='#9bb9be', GradientType=0);
-        
+
         position: absolute;
         opacity: 0;
         left: 0;
@@ -648,9 +661,12 @@ h2 {
 
             .subitems {
                 .row-flex();
-                .xs-block({
-                    justify-content: center;
-                });
+
+                .xs-block( {
+                        justify-content: center;
+                    }
+
+                );
 
                 .subitem {
                     .col();
@@ -678,11 +694,13 @@ h2 {
             display: flex;
             justify-content: center;
 
-            .lg-block({
-                display: none;
-            });
+            .lg-block( {
+                    display: none;
+                }
 
-            
+            );
+
+
 
             .line_1px {
                 width: 1px;
@@ -692,7 +710,7 @@ h2 {
         }
     }
 
-    .icons{
+    .icons {
         display: flex;
         justify-content: center;
         margin: 0 auto;
@@ -700,13 +718,15 @@ h2 {
         margin-top: 15px;
         flex-wrap: wrap;
 
-        .iconwidth{
+        .iconwidth {
             width: 20%;
-            
 
-            .xs-block({
-                width: 30%;
-            });
+
+            .xs-block( {
+                    width: 30%;
+                }
+
+            );
 
             .icon {
                 max-width: 50px;
@@ -728,14 +748,7 @@ h2 {
                     }
                 }
             }
-
         }
-
-       
-    
-        
-    
-        
     }
 }
 
@@ -750,6 +763,443 @@ h3.big {
     margin-bottom: 25px;
 }
 
-
-
 // КОНЕЦ "Секция Нюансы"
+
+// НАЧАЛО "Секция РАБОТЫ"
+
+.example {
+
+    padding: 110px 0 150px 0;
+
+    .items {
+        .row-flex();
+        justify-content: center;
+        padding-top: 70px;
+
+        .item {
+            .col();
+            .size(12);
+
+            .slider {
+
+                .slider_item {
+                    position: relative;
+
+                    display: block !important;
+
+                    img {
+                        display: block;
+                        filter: grayscale(100%);
+                        opacity: 0.5;
+                    }
+
+                    .gray {
+                        z-index: 9;
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        width: 100%;
+                        height: 100%;
+                        opacity: 0;
+                        background: rgba(255, 255, 255, 0);
+                        background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(2, 60, 71, 1) 100%);
+                        background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0)), color-stop(100%, rgba(2, 60, 71, 1)));
+                        background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(2, 60, 71, 1) 100%);
+                        background: -o-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(2, 60, 71, 1) 100%);
+                        background: -ms-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(2, 60, 71, 1) 100%);
+                        background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(2, 60, 71, 1) 100%);
+                        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#023c47', GradientType=0);
+                    }
+
+                    .gradient {
+                        z-index: 10;
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: rgba(255, 255, 255, 0);
+                        background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(224, 231, 233, 0.12) 44%, rgba(34, 85, 94, 0.87) 76%, rgba(2, 60, 71, 1) 100%);
+                        background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0)), color-stop(44%, rgba(224, 231, 233, 0.12)), color-stop(76%, rgba(34, 85, 94, 0.87)), color-stop(100%, rgba(2, 60, 71, 1)));
+                        background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(224, 231, 233, 0.12) 44%, rgba(34, 85, 94, 0.87) 76%, rgba(2, 60, 71, 1) 100%);
+                        background: -o-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(224, 231, 233, 0.12) 44%, rgba(34, 85, 94, 0.87) 76%, rgba(2, 60, 71, 1) 100%);
+                        background: -ms-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(224, 231, 233, 0.12) 44%, rgba(34, 85, 94, 0.87) 76%, rgba(2, 60, 71, 1) 100%);
+                        background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(224, 231, 233, 0.12) 44%, rgba(34, 85, 94, 0.87) 76%, rgba(2, 60, 71, 1) 100%);
+                        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#023c47', GradientType=0);
+                        opacity: 0;
+                        transition: 0.3s;
+
+                        .name {
+                            position: absolute;
+                            bottom: 20%;
+                            text-align: center;
+                            width: 100%;
+                            .fontfull(700, 18px, 21px, 0);
+                            color: @txtcolor;
+                        }
+
+                        .link {
+                            position: absolute;
+                            bottom: 12%;
+                            text-align: center;
+                            width: 100%;
+                            .fontfull(400, 18px, 21px, 0.4em);
+                            color: @txtcolor;
+
+                            a {
+                                text-decoration: none;
+                                transition: 0.3s;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .slick-track {
+                padding: 25px 0 0 0;
+            }
+
+            .slick-slide {
+                margin: 0 40px;
+                transition: 0.3s;
+                border: none;
+                outline: none;
+
+                .gray {
+                    opacity: 1 !important;
+                    transition: 0.3s;
+                }
+            }
+
+            .slick-center {
+                position: relative;
+                transform: scale(1.05) translateY(-10px);
+
+                img {
+                    filter: grayscale(0%) !important;
+                    opacity: 1 !important;
+                    transition: 0.3s;
+                }
+
+                &:hover {
+
+                    .gradient {
+                        opacity: 1 !important;
+                    }
+                }
+
+
+                .gray {
+                    opacity: 0 !important;
+                }
+
+                &:before {
+                    position: absolute;
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 50%;
+                    border: 3px solid @bgcolor02;
+                    content: '';
+                    top: 50%;
+                    margin-top: -15px;
+                    left: -37px;
+                    margin-left: -15px;
+                    z-index: 1;
+
+                    .xs-block( {
+                            display: none;
+                        }
+
+                    );
+                }
+
+                &:after {
+                    position: absolute;
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 50%;
+                    border: 3px solid @bgcolor02;
+                    content: '';
+                    top: 50%;
+                    margin-top: -15px;
+                    right: -37px;
+                    margin-right: -15px;
+                    z-index: 1;
+
+                    .xs-block( {
+                            display: none;
+                        }
+
+                    );
+                }
+            }
+
+            .slick-prev,
+            .slick-next {
+                height: 30px;
+                width: 30px;
+                position: absolute;
+                top: 50%;
+                z-index: 10;
+
+                &:before {
+                    height: 30px;
+                    width: 15px;
+                    position: absolute;
+                    top: 0;
+                    left: 50%;
+                    margin-left: -7.5px;
+                }
+
+            }
+
+            .slick-next {
+                right: -10px;
+
+                &:before {
+                    content: url(../img/arrow_right.svg);
+
+                }
+            }
+
+            .slick-prev {
+
+                left: -10px;
+
+                &:before {
+                    content: url(../img/arrow_left.svg);
+                }
+            }
+        }
+    }
+}
+
+// КОНЕЦ "Секция РАБОТЫ"
+
+//НАЧАЛО "Секция НАШИ ЦЕЛИ И ИДЕИ"
+
+.about {
+    background: @bgcolor02;
+    padding: 40px 0 50px 0;
+    color: @txtcolor;
+
+    .items {
+        .row-flex();
+        position: relative;
+        justify-content: center;
+
+        .photo {
+            .col();
+            .size(4);
+            .size-sm(6);
+            .size-xs(10);
+
+            .photo_wrapper {
+
+
+                position: relative;
+                top: -70px;
+
+                img {
+                    display: block;
+                }
+
+                .gray {
+                    z-index: 1;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(255, 255, 255, 0);
+                    background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(2, 60, 71, 1) 100%);
+                    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0)), color-stop(100%, rgba(2, 60, 71, 1)));
+                    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(2, 60, 71, 1) 100%);
+                    background: -o-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(2, 60, 71, 1) 100%);
+                    background: -ms-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(2, 60, 71, 1) 100%);
+                    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(2, 60, 71, 1) 100%);
+                    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#023c47', GradientType=0);
+                }
+            }
+        }
+
+        .description {
+            .col();
+            .size(8);
+
+            .sm-block( {
+                    padding-bottom: 70px;
+                }
+
+            );
+            .size-sm(10);
+            .size-xs(12);
+
+            h2 {
+                text-align: left;
+                margin-top: 50px;
+                margin-bottom: 30px;
+
+                .sm-block( {
+                        margin-top: 0;
+                        text-align: center;
+                    }
+
+                );
+            }
+
+            p {
+                .fontfull(400, 15px, 21px, 0);
+                margin-top: 11px;
+            }
+        }
+    }
+}
+
+//КОНЕЦ "Секция НАШИ ЦЕЛИ И ИДЕИ"
+
+//НАЧАЛО "Секция CONTACT US"
+
+.contacts {
+    padding: 90px 0;
+    background: #023C47;
+    color: @txtcolor;
+
+    h2 {
+        margin-bottom: 10px;
+    }
+
+    p {
+        text-align: center;
+    }
+
+    .items {
+        margin-top: 40px;
+        .row-flex();
+        .fontfull(400, 18px, 22px, 0);
+        justify-content: center;
+
+        .input {
+            .col();
+            .size(4);
+            .size-sm(8);
+            .size-xs(11);
+
+            input {
+                display: block;
+                border: none;
+                outline: none;
+                padding: 10px;
+                margin-top: 20px;
+                width: 100%;
+                box-sizing: border-box;
+                opacity: 0.8;
+                transition: 0.3s;
+
+
+
+                &:hover,
+                &:active,
+                &:focus {
+                    opacity: 1;
+                }
+
+                &:first-child {
+                    margin-top: 0;
+                }
+            }
+        }
+
+        .textarea {
+            .col();
+            .size(8);
+            .shift-sm(2);
+
+            .sm-block( {
+                    margin-top: 40px;
+                }
+
+            );
+            .size-xs(11);
+            .shift-xs(0);
+
+            textarea {
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
+                padding: 10px;
+                max-height: 100%;
+                opacity: 0.8;
+                transition: 0.3s;
+                border: none;
+                outline: none;
+
+                &:hover,
+                &:active,
+                &:focus {
+                    opacity: 1;
+                }
+            }
+        }
+
+        input[type=submit] {
+            display: block;
+            border: none;
+            outline: none;
+            padding: 10px 30px;
+            margin-top: 35px;
+            background: @txtcolor;
+            opacity: 0.8;
+            transition: 0.3s;
+            color: @bgcolor02;
+            cursor: pointer;
+
+            &:hover,
+            &:active,
+            &:focus {
+                opacity: 1;
+            }
+        }
+    }
+
+    label {
+        .fontfull(400, 15px, 21px, 0);
+        color: yellow;
+    }
+}
+
+//КОНЕЦ "Секция CONTACT US"
+
+//НАЧАЛО "Секция MAGNIFIC-POPUP"
+
+.popup-modal {
+    display: none;
+}
+
+.mfp-content {
+    background: @txtcolor;
+    max-width: 400px;
+    margin: 20 auto;
+    padding: 70px 20px 45px 20px;
+    border: 3px solid rgba(0, 0, 0, 0.3);
+    text-align: center;
+
+    p {
+        text-align: center;
+        color: @bgcolor02;
+    }
+
+    .link_container {
+        margin-top: 30px;
+        text-align: center;
+
+        a {
+            background: @bgcolor;
+            text-decoration: none;
+            padding: 10px 30px;
+            outline: none;
+        }
+    }
+}
+
+//КОНЕЦ "Секция MAGNIFIC-POPUP"

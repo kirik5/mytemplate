@@ -12,7 +12,7 @@ const settings = {
 		},
 		breakPoints: {
 			lg: {
-				width: "1200px",
+				width: "1230px",
 			},
 			md: {
 				width: "992px",
