@@ -1176,28 +1176,157 @@ h3.big {
     display: none;
 }
 
-.mfp-content {
-    background: @txtcolor;
-    max-width: 400px;
-    margin: 20 auto;
-    padding: 70px 20px 45px 20px;
-    border: 3px solid rgba(0, 0, 0, 0.3);
-    text-align: center;
-
-    p {
+.mfp-inline-holder {
+    #test-modal {
+        background: @txtcolor;
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 70px 20px 45px 20px;
+        border: 3px solid rgba(0, 0, 0, 0.3);
         text-align: center;
-        color: @bgcolor02;
+        position: relative;
+
+        button.mfp-close {
+            display: block;
+            position: absolute;
+            top: 0px;
+            right: 0px;
+        }
+
+        p {
+            text-align: center;
+            color: @bgcolor02;
+        }
+
+        .link_container {
+            margin-top: 30px;
+            text-align: center;
+
+            a {
+                background: @bgcolor;
+                text-decoration: none;
+                padding: 10px 30px;
+                outline: none;
+            }
+        }
+    }
+}
+
+.mfp-image-holder {
+    .mfp-content {
+        padding: 0;
+
+        button.mfp-close {
+            display: block;
+            position: absolute;
+            top: -14px;
+            right: -30px;
+        }
+
+        img.mfp-img {
+            padding: 0;
+        }
+    }
+}
+
+/**
+ * Fade-zoom animation for first dialog
+ */
+
+/* start state */
+.mfp-zoom-in .zoom-anim-dialog {
+    opacity: 0;
+
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+
+
+
+    -webkit-transform: scale(0.8);
+    -moz-transform: scale(0.8);
+    -ms-transform: scale(0.8);
+    -o-transform: scale(0.8);
+    transform: scale(0.8);
+}
+
+/* animate in */
+.mfp-zoom-in.mfp-ready .zoom-anim-dialog {
+    opacity: 1;
+
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+}
+
+/* animate out */
+.mfp-zoom-in.mfp-removing .zoom-anim-dialog {
+    -webkit-transform: scale(0.8);
+    -moz-transform: scale(0.8);
+    -ms-transform: scale(0.8);
+    -o-transform: scale(0.8);
+    transform: scale(0.8);
+
+    opacity: 0;
+}
+
+/* Dark overlay, start state */
+.mfp-zoom-in.mfp-bg {
+    opacity: 0;
+    -webkit-transition: opacity 0.3s ease-out;
+    -moz-transition: opacity 0.3s ease-out;
+    -o-transition: opacity 0.3s ease-out;
+    transition: opacity 0.3s ease-out;
+}
+
+/* animate in */
+.mfp-zoom-in.mfp-ready.mfp-bg {
+    opacity: 0.8;
+}
+
+/* animate out */
+.mfp-zoom-in.mfp-removing.mfp-bg {
+    opacity: 0;
+}
+
+// this class equals "mainClass" JS option
+.mfp-with-fade {
+
+    // before-open state
+    .mfp-content,
+    .mfp-arrow,
+    &.mfp-bg {
+        opacity: 0;
+        -webkit-backface-visibility: hidden;
+        -webkit-transition: opacity 0.3s ease-out;
+        -moz-transition: opacity 0.3s ease-out;
+        -o-transition: opacity 0.3s ease-out;
+        transition: opacity 0.3s ease-out;
     }
 
-    .link_container {
-        margin-top: 30px;
-        text-align: center;
+    // open state
+    &.mfp-ready {
 
-        a {
-            background: @bgcolor;
-            text-decoration: none;
-            padding: 10px 30px;
-            outline: none;
+        .mfp-content,
+        .mfp-arrow {
+            opacity: 1;
+        }
+
+        &.mfp-bg {
+            opacity: 0.8; // background opacity
+        }
+    }
+
+    // closed state
+    &.mfp-removing {
+
+        .mfp-content,
+        .mfp-arrow,
+        &.mfp-bg {
+            opacity: 0;
         }
     }
 }

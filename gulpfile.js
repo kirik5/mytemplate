@@ -7,18 +7,12 @@ const	gulp = require('gulp'),
 		svgsprite = require('gulp-svg-sprite'),
 		svgmin = require('gulp-svgmin'),
 		cheerio = require('gulp-cheerio'),
-		replace = require('gulp-replace');;
-		
-		
-		//autoprefixer = require('gulp-autoprefixer'),
-        //gcmq = require('gulp-group-css-media-queries'),
-        //sourcemaps = require('gulp-sourcemaps'),
-        //gucleancss = require('gulp-clean-css'),
-        //pngquant = require('imagemin-pngquant'),
-		//uglify = require('gulp-uglify'),
-        //imagemin = require('gulp-imagemin');
-			
-const	path = {
+		replace = require('gulp-replace'),
+		autoprefixer = require('gulp-autoprefixer'),
+		cleancss = require('gulp-clean-css'),
+        gcmq = require('gulp-group-css-media-queries'),
+        imagemin = require('gulp-imagemin'),
+		path = {
             dist: {
                 css: './dist/css/',
                 fonts: './dist/fonts/',
@@ -30,14 +24,14 @@ const	path = {
             src: {
                 css: {
                     srcdir: './src/css/',
-					srcfiles: './src/css/**/*.css'
+					srcfile: './src/css/**/*.css'
                 },
 				fonts: {
                     srcfile: './src/fonts/**/*.*',
                     srcdir: './src/fonts/'
                 },
 				img: {
-                    srcfile: './src/img/**/*.*',
+                    srcfile: ['./src/img/**/*.*', '!./src/img/favicon/index.html'],
                     srcdir: './src/img/'
                 },
                 svg: {
@@ -70,11 +64,9 @@ const	path = {
                     srcdir: './src/'
                 }
             }
-        };	
-		
-const	isDev = true;
-		
-const	webConfig = {
+        },	
+		isDev = (process.argv.indexOf('--prod') == -1),
+		webConfig = {
 			entry: {
 				main: './src/js_src/main.js'
 			},
@@ -92,22 +84,49 @@ const	webConfig = {
 			},
 			mode: isDev ? 'development' : 'production',
 			devtool: isDev ? 'eval-sourcemap' : 'none'
-		};
+		},
+		favicons = require('favicons').stream,
+    	log = require('fancy-log');
 
-var favicons = require("favicons").stream,
-    log = require("fancy-log");
 
-gulp.task("favicons", function () {
-    return gulp.src("./src/img/logo.png").pipe(favicons({
+
+// FUNCTION AND TASKS FOR DEVELOPMENT...    	
+
+
+		
+gulp.task('delsrc', function(){
+	return del([path.src.css.srcdir+'*',
+				path.src.fonts.srcdir+'*',
+				path.src.img.srcdir+'*',
+				path.src.img.srcdir+'favicon/*',
+				path.src.js.srcdir+'*',
+				path.src.js_src.srcdir+'*',
+				path.src.js_src.srcdir+'libs/*',
+				path.src.less.srcdir+'*',
+				path.src.less.srcdir+'libs/*',
+				path.src.php.srcdir+'*',
+				'!'+path.src.img.srcdir+'favicon',
+				'!'+path.src.js_src.srcdir+'main.js',
+				'!'+path.src.js_src.srcdir+'libs',
+				'!'+path.src.less.srcdir+'libs',
+				'!'+path.src.less.srcdir+'main.less',
+				'!'+path.src.less.srcdir+'mixins.less',
+				'!'+path.src.less.srcdir+'settings.less',
+				'!'+path.src.less.srcdir+'smart-grid.less',
+				'!'+path.src.less.srcdir+'fonts.less'])
+});
+
+gulp.task('favicons', function () {
+    return gulp.src('./src/img/logo.png').pipe(favicons({
     	appName: 'My App',
         appShortName: 'App',
         appDescription: 'This is my application',
         path: './img/favicon',
-        display: "standalone",
+        display: 'standalone',
         background: '#023C47',
         theme_color: '#023C47',
-        orientation: "portrait",
-        html: "index.html",
+        orientation: 'portrait',
+        html: 'index.html',
         pipeHTML: true,
         icons: {
             // Platform Options:
@@ -119,7 +138,6 @@ gulp.task("favicons", function () {
             //   * mask - apply mask in order to create circle icon (applied by default for firefox). `boolean`
             //   * overlayGlow - apply glow effect after mask has been applied (applied by default for firefox). `boolean`
             //   * overlayShadow - apply drop shadow after mask has been applied .`boolean`
-            //
             android: false,              // Create Android homescreen icon. `boolean` or `{ offset, background, mask, overlayGlow, overlayShadow }`
             appleIcon: false,            // Create Apple touch icons. `boolean` or `{ offset, background, mask, overlayGlow, overlayShadow }`
             appleStartup: false,         // Create Apple startup images. `boolean` or `{ offset, background, mask, overlayGlow, overlayShadow }`
@@ -131,13 +149,9 @@ gulp.task("favicons", function () {
         },
         replace: true
     }))
-    .on("error", log)
-    .pipe(gulp.dest("./src/img/favicon/"));
+    .on('error', log)
+    .pipe(gulp.dest('./src/img/favicon/'));
 });
-		
-function fdelcss(){
-	return del(path.src.css.srcdir+'*');
-}
 		
 function fless(){
 	return gulp.src(path.src.less.srcfiles)
@@ -174,34 +188,6 @@ function fwatch() {
 	gulp.watch(path.src.img.srcfile, freload);
     gulp.watch(path.src.fonts.srcfile, freload);
 }
-
-//tasks
-		
-gulp.task('delsrc', function(){
-	return del([path.src.css.srcdir+'*',
-				path.src.fonts.srcdir+'*',
-				path.src.img.srcdir+'*',
-				path.src.img.srcdir+'favicon/*',
-				path.src.js.srcdir+'*',
-				path.src.js_src.srcdir+'*',
-				path.src.js_src.srcdir+'libs/*',
-				path.src.less.srcdir+'*',
-				path.src.less.srcdir+'libs/*',
-				path.src.php.srcdir+'*',
-				'!'+path.src.img.srcdir+'favicon',
-				'!'+path.src.js_src.srcdir+'main.js',
-				'!'+path.src.js_src.srcdir+'libs',
-				'!'+path.src.less.srcdir+'libs',
-				'!'+path.src.less.srcdir+'main.less',
-				'!'+path.src.less.srcdir+'mixins.less',
-				'!'+path.src.less.srcdir+'settings.less',
-				'!'+path.src.less.srcdir+'smart-grid.less',
-				'!'+path.src.less.srcdir+'fonts.less'])
-});
-
-gulp.task('deldist', function(){
-	return del(path.dist.html+'*')
-});
 
 gulp.task('awesome', function(){
 	return gulp.src('./node_modules/font-awesome/fonts/**/*.*')
@@ -241,3 +227,80 @@ gulp.task('scripts',fscripts);
 gulp.task('watch', fwatch);
 
 gulp.task('default', gulp.series(gulp.parallel(fless, fscripts), fwatch));
+
+
+
+
+// FUNCTION AND TASKS FOR PRODACTION...
+
+function fdeldist(){
+	return del(path.dist.html+'*');
+}
+
+gulp.task('deldist', fdeldist);
+
+function fbuildhtml(){
+	return gulp.src(path.src.html.srcfile)
+		   .pipe(gulp.dest(path.dist.html));
+}
+
+gulp.task('buildhtml', fbuildhtml);
+
+function fbuildcss(){
+	return gulp.src(path.src.css.srcfile)
+		   .pipe(gcmq())
+		   .pipe(autoprefixer({
+				cascade: false
+		   }))
+		   .pipe(cleancss({
+				level: 2
+		   }))
+		   .pipe(gulp.dest(path.dist.css))
+}
+
+gulp.task('buildcss', fbuildcss);
+
+function fbuildimg(){
+	return gulp.src(path.src.img.srcfile)
+		   .pipe(imagemin([
+				imagemin.gifsicle({interlaced: true}),
+				imagemin.jpegtran({progressive: true}),
+				imagemin.optipng({optimizationLevel: 5}),
+				imagemin.svgo({
+					plugins: [
+						{removeViewBox: false},
+						{cleanupIDs: false}
+					]
+				})
+		   ]))
+		   .pipe(gulp.dest(path.dist.img))
+}
+
+gulp.task('buildimg', fbuildimg);
+
+function fbuildfont(){
+	return gulp.src(path.src.fonts.srcfile)
+          .pipe(gulp.dest(path.dist.fonts));
+}
+
+gulp.task('buildfont', fbuildfont);
+
+function fbuildphp(){
+	return gulp.src(path.src.php.srcfile)
+          .pipe(gulp.dest(path.dist.php));
+}
+
+gulp.task('buildphp', fbuildphp);
+
+function fbuildjs(){
+    return gulp.src('./src/js_src/*.js')
+		   .pipe(webpackstream(webConfig))
+		   .pipe(rename({
+			   suffix: '.min'
+		   }))
+		   .pipe(gulp.dest(path.dist.js));
+}
+
+gulp.task('buildjs', fbuildjs);
+
+gulp.task('build', gulp.series(fdeldist, gulp.parallel(fbuildhtml, fbuildcss, fbuildfont, fbuildjs, fbuildphp, fbuildimg)));

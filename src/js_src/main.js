@@ -89,14 +89,13 @@ $(document).ready(function () {
 
 	$('.slider').slick({
 		centerMode: true,
-		  centerPadding: '0px',
+		centerPadding: '0px',
 		infinite: true,
 		slidesToShow: 3,
 		slidesToScroll: 1,
-		responsive:[
-			{
+		responsive: [{
 				breakpoint: 992,
-				settings:{
+				settings: {
 					slidesToShow: 1,
 					centerPadding: '200px',
 					arrows: false
@@ -104,14 +103,14 @@ $(document).ready(function () {
 			},
 			{
 				breakpoint: 768,
-				settings:{
+				settings: {
 					slidesToShow: 1,
 					centerPadding: '100px'
 				}
 			},
 			{
 				breakpoint: 576,
-				settings:{
+				settings: {
 					slidesToShow: 1,
 					centerPadding: '0px',
 					arrows: true
@@ -121,54 +120,54 @@ $(document).ready(function () {
 	});
 
 	$('form').validate({
-		submitHandler: function(form){
+		submitHandler: function (form) {
 			$.ajax({
 				type: "POST",
 				url: "php/send.php",
 				data: $(form).serialize(),
-				success: function() {
-					
+				success: function () {
+
 				},
-				error:  function(){
-					
+				error: function () {
+
 					$('.popup-modal').magnificPopup('open');
 					$('input[type=text]').val('');
 					$('textarea').val('');
 				}
 			});
 		},
-		rules:{
-			name:{
+		rules: {
+			name: {
 				required: true,
 				minlength: 2
 			},
-			email:{
+			email: {
 				required: true,
 				minlength: 5
 			},
-			title:{
+			title: {
 				required: true,
 				minlength: 5
 			},
-			details:{
+			details: {
 				required: true,
 				minlength: 5
 			}
 		},
-		messages:{
-			name:{
+		messages: {
+			name: {
 				required: "Це поле обов'язкове для заповнення!",
 				minlength: "Ім'я повинно бути не менш ніж 2 символи!"
 			},
-			email:{
+			email: {
 				required: "Це поле обов'язкове для заповнення!",
 				minlength: "Номер телефону має містити не менш ніж 5 символів!"
 			},
-			title:{
+			title: {
 				required: "Це поле обов'язкове для заповнення!",
 				minlength: "Номер телефону має містити не менш ніж 5 символів!"
 			},
-			details:{
+			details: {
 				required: "Це поле обов'язкове для заповнення!",
 				minlength: "Номер телефону має містити не менш ніж 5 символів!"
 			}
@@ -178,12 +177,21 @@ $(document).ready(function () {
 	$(function () {
 		$('.popup-modal').magnificPopup({
 			type: 'inline',
-			preloader: false
+			removalDelay: 300,
+			closeOnContentClick: true,
+			mainClass: 'mfp-zoom-in'
 		});
 		$(document).on('click', '.popup-modal-dismiss', function (e) {
 			e.preventDefault();
 			$.magnificPopup.close();
 		});
+	});
+
+	$('.single-popup').magnificPopup({
+		type: 'image',
+		removalDelay: 300,
+		closeOnContentClick: true,
+		mainClass: 'mfp-with-fade'
 	});
 
 });
