@@ -24,7 +24,9 @@ const	gulp = require('gulp'),
             src: {
                 css: {
                     srcdir: './src/css/',
-					srcfile: './src/css/**/*.css'
+					srcfile: './src/css/**/*.css',
+					srcall: './src/css/**/*.*',
+					srcwithoutcss: '!./src/css/**/*.css'
                 },
 				fonts: {
                     srcfile: './src/fonts/**/*.*',
@@ -260,6 +262,13 @@ function fbuildcss(){
 
 gulp.task('buildcss', fbuildcss);
 
+function fbuildothercss(){
+	return gulp.src([path.src.css.srcall, path.src.css.srcwithoutcss])
+		   .pipe(gulp.dest(path.dist.css))
+}
+
+gulp.task('buildothercss', fbuildothercss);
+
 function fbuildimg(){
 	return gulp.src(path.src.img.srcfile)
 		   .pipe(imagemin([
@@ -303,4 +312,6 @@ function fbuildjs(){
 
 gulp.task('buildjs', fbuildjs);
 
-gulp.task('build', gulp.series(fdeldist, gulp.parallel(fbuildhtml, fbuildcss, fbuildfont, fbuildjs, fbuildphp, fbuildimg)));
+gulp.task('build', gulp.series(fdeldist, gulp.parallel(fbuildhtml, fbuildcss, fbuildothercss, fbuildfont, fbuildjs, fbuildphp, fbuildimg)));
+
+//gulp build --prod
